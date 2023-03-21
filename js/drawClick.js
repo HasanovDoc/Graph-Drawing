@@ -3,19 +3,21 @@ Nods = [];
 
 let iter = 0;
 
-// canvas.addEventListener('click', (e) => { //По клику рисовать вершины.
-//     let label = "Node - " + iter;
+canvas.addEventListener('click', (e) => { //По клику рисовать вершины.
+    let label = "Node - " + iter;
 
-//     drawNode(e.offsetX, e.offsetY, label);
-//     addNodes(iter, e.offsetX, e.offsetY, label);
-//     if (Nods.length >= 2) {
-//         addEdgs(iter - 1, iter);
-//         drawEdges(Nods[iter - 1].X, Nods[iter - 1].Y, Nods[iter].X, Nods[iter].Y);
-//     }
-//     iter++;
+    drawNode(e.offsetX, e.offsetY, label);
+    addNodes(iter, e.offsetX, e.offsetY, label);
+    if (Nods.length >= 2) {
+        addEdgs(iter - 1, iter);
+        drawEdges(Nods[iter - 1].X, Nods[iter - 1].Y, Nods[iter].X, Nods[iter].Y);
+    }
+    iter++;
 
-// });
+});
 
+
+//Рисование путем Drag&Drop
 canvas.addEventListener('mousedown', (e) => {
     let label = "Node - " + iter;
 
@@ -38,7 +40,7 @@ canvas.addEventListener('click', (e) => {
 
     iter++
 });
-
+/////////////////////////
 
 function addEdgs(src, tgt) { //Добавление ребра
     Edgs.push({ source: src, target: tgt });
