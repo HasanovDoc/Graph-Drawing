@@ -1,9 +1,10 @@
-const canvas = document.querySelector('#graph-canvas');
-const ctx = canvas.getContext('2d');
+const canvas = document.querySelector('#graph-canvas'),
+    ctx = canvas.getContext('2d'),
+    wrapper = document.querySelector('.wrapper');
 
 // Определяем размеры холста
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight
+canvas.width = wrapper.offsetWidth;
+canvas.height = window.innerHeight;
 
 // // Определяем параметры графа
 // const nodes = [
