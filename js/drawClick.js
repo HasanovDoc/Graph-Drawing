@@ -1,46 +1,23 @@
 Edgs = [];
 Nods = [];
-
+const switcher = document.querySelector('.swicher-btn');
 let iter = 0;
 
-canvas.addEventListener('click', (e) => { //По клику рисовать вершины.
-    let label = "Node - " + iter;
+switcher.addEventListener('change', ()=>{
 
-    drawNode(e.offsetX, e.offsetY, label);
-    addNodes(iter, e.offsetX, e.offsetY, label);
-    if (Nods.length >= 2) {
-        addEdgs(iter - 1, iter);
-        drawEdges(Nods[iter - 1].X, Nods[iter - 1].Y, Nods[iter].X, Nods[iter].Y);
-    }
-    iter++;
+if (switcher.checked) {
+    canvas.removeEventListener('mousedown', DaDM);
+    canvas.removeEventListener('click', DaDC);
 
-});
-
-
-//Рисование путем Drag&Drop
-canvas.addEventListener('mousedown', (e) => {
-    let label = "Node - " + iter;
-
-    addNodes(iter, e.offsetX, e.offsetY, label);
-    drawNode(e.offsetX, e.offsetY, label);
-
-    iter++
-});
-
-canvas.addEventListener('click', (e) => {
-    let label = "Node - " + iter;
-
-    addNodes(iter, e.offsetX, e.offsetY, label);
-    drawNode(e.offsetX, e.offsetY, label);
-
-    if (Nods.length >= 2) {
-        addEdgs(iter - 1, iter);
-        drawEdges(Nods[iter - 1].X, Nods[iter - 1].Y, Nods[iter].X, Nods[iter].Y);
-    }
-
-    iter++
-});
+    canvas.addEventListener('click', drawC);
+}else if (!switcher.checked){
+    canvas.removeEventListener('click', drawC);
+    //Рисование путем Drag&Drop
+    canvas.addEventListener('mousedown', DaDM);
+    canvas.addEventListener('click', DaDC);
+}
 /////////////////////////
+});
 
 function addEdgs(src, tgt) { //Добавление ребра
     Edgs.push({ source: src, target: tgt });
