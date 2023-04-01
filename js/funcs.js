@@ -14,7 +14,7 @@ function DaDC(event) {
     drawNode(event.offsetX, event.offsetY, label);
 
     if (Nods.length >= 2) {
-        addEdgs(iter - 1, iter);
+        //addEdgs(iter - 1, iter);
         drawEdges(Nods[iter - 1].X, Nods[iter - 1].Y, Nods[iter].X, Nods[iter].Y);
     }
 
@@ -26,8 +26,8 @@ function drawC(event) { //По клику рисовать вершины.
 
     drawNode(event.offsetX, event.offsetY, label);
     addNodes(iter, event.offsetX, event.offsetY, label);
-    if (Nods.length >= 2) {
-        addEdgs(iter - 1, iter);
+    if (iter >= 1) {
+        //addEdgs(iter - 1, iter);
         drawEdges(Nods[iter - 1].X, Nods[iter - 1].Y, Nods[iter].X, Nods[iter].Y);
     }
     iter++;
@@ -42,7 +42,8 @@ function drawNodesCoG(event) { //Рисовать вершины по клику
     if (iterCoGr >= 0) {
         for (let index = 0; index < iterCoGr; index++) {
             addEdgs(iterCoGr, index);
-            drawEdges(Nods[iterCoGr].X, Nods[iterCoGr].Y, Nods[index].X, Nods[index].Y);
+            //drawEdges(Nods[iterCoGr].X, Nods[iterCoGr].Y, Nods[index].X, Nods[index].Y);
+            btnDrawedges.classList.add('visible');
         }
     }
 
@@ -50,9 +51,10 @@ function drawNodesCoG(event) { //Рисовать вершины по клику
 }
 
 function drawEdgesCoG() {
-    for (let index = 0; index < iterCoGr; index++) {
-        drawEdges(Nods[iter - 1].X, Nods[iter - 1].Y, Nods[iter].X, Nods[iter].Y);
-    }
+    for (let i = 0; i < iterCoGr; i++)
+        for (let j = 0; j < i; j++)
+            drawEdges(Nods[j].X, Nods[j].Y, Nods[i].X, Nods[i].Y);
+
 }
 
 function addEdgs(src, tgt) { //Добавление ребра
@@ -81,3 +83,11 @@ function drawNode(x, y, label) { //функция отрисовки одной 
     ctx.textBaseline = 'middle';
     ctx.fillText(label, x, y);
 };
+
+function clearAll() { //Функция очистки всех массивов и холста
+    iter = 0;
+    iterCoGr = 0;
+    Nods.splice(0, Nods.length);
+    Edgs.splice(0, Edgs.length);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}

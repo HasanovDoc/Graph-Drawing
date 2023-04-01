@@ -16,15 +16,30 @@
 
 .header {
     padding-top: 10px;
+    min-width: 101%;
+    height: 25px;
 }
 
 .btn-draw {
     display: none;
+    border-radius: 5px;
+    border: 0;
+    width: 100px;
+    height: 20px;
+    font-size: 10px;
     margin-left: 30px;
 }
 
 .btn-draw.visible {
     display: inline;
+}
+
+.btn-clear {
+    float: right;
+    border-radius: 5px;
+    border: 0;
+    width: 100px;
+    height: 20px;
 }
 
 #graph-canvas {
