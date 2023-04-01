@@ -58,6 +58,7 @@ function drawEdgesCoG() {
 }
 
 function drawBipGraph() {
+    clearAll();
     let aVar = document.querySelector('#aValue').valueAsNumber;
     let bVar = document.querySelector('#bValue').valueAsNumber;
     let iterBip = 0;
@@ -121,5 +122,7 @@ function clearAll() { //Функция очистки всех массивов 
     iterCoGr = 0;
     Nods.splice(0, Nods.length);
     Edgs.splice(0, Edgs.length);
+    NodsLD.splice(0, NodsLD.length);
+    NodsLU.splice(0, NodsLU.length);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
