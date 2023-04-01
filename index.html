@@ -13,10 +13,21 @@
 <body>
     <div class="container">
         <div class="wrapper">
-            <label class="switch">
+            <!-- <label class="switch">
                 <input class="swicher-btn" type="checkbox">
                 <span class="slider round"></span>
-              </label>
+              </label> -->
+            <div class="header">
+                <label for="draw-select">Choose draw mode:</label>
+                <select name="modes" id="draw-select">
+                    <option value="dragdrop" selected>drag & drop</option>
+                    <option value="clickdraw" >click draw</option>
+                    <option value="drawnodes">draw nodes</option>
+                </select>
+                <label for="draw-select__btn">
+                    <button class="btn-draw">Draw Complete Graph</button>
+                </label>
+            </div>
             <canvas id="graph-canvas"></canvas>
         </div>
     </div>
@@ -24,6 +35,6 @@
 
 <script src="./js/funcs.js"></script>
 <script src="./js/graph.js"></script>
-<script src="./js/drawClick.js"></script>
+<script src="./js/events.js"></script>
 
 </html>

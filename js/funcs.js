@@ -34,6 +34,27 @@ function drawC(event) { //По клику рисовать вершины.
 
 };
 
+function drawNodesCoG(event) { //Рисовать вершины по клику для отрисовки полного графа
+    let label = "CG: " + iterCoGr;
+
+    drawNode(event.offsetX, event.offsetY, label);
+    addNodes(iterCoGr, event.offsetX, event.offsetY, label);
+    if (iterCoGr >= 0) {
+        for (let index = 0; index < iterCoGr; index++) {
+            addEdgs(iterCoGr, index);
+            drawEdges(Nods[iterCoGr].X, Nods[iterCoGr].Y, Nods[index].X, Nods[index].Y);
+        }
+    }
+
+    iterCoGr++;
+}
+
+function drawEdgesCoG() {
+    for (let index = 0; index < iterCoGr; index++) {
+        drawEdges(Nods[iter - 1].X, Nods[iter - 1].Y, Nods[iter].X, Nods[iter].Y);
+    }
+}
+
 function addEdgs(src, tgt) { //Добавление ребра
     Edgs.push({ source: src, target: tgt });
 };
