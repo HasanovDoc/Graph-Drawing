@@ -1,7 +1,11 @@
 Edgs = [];
 Nods = [];
+NodsLU = [];
+NodsLD = [];
 const drawMode = document.querySelector('#draw-select');
 const btnDrawedges = document.querySelector('.btn-draw');
+const bipBtn = document.querySelector('.bip-btn');
+
 let iter = 0;
 let iterCoGr = 0;
 
@@ -36,3 +40,5 @@ drawMode.addEventListener('change', () => {
         btnDrawedges.addEventListener('click', drawEdgesCoG);
     }
 });
+
+bipBtn.addEventListener('click', drawBipGraph);
