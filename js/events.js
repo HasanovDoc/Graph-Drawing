@@ -12,6 +12,7 @@ canvas.addEventListener('click', DaDC);
 
 drawMode.addEventListener('change', () => {
     clearAll();
+    btnDrawedges.classList.remove('visible');
     if (drawMode.selectedIndex == 1) {
         canvas.removeEventListener('mousedown', DaDM);
         canvas.removeEventListener('click', DaDC);

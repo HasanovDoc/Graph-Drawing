@@ -12,23 +12,27 @@
 
 <body>
     <div class="container">
+        <div class="header">
+            <div class="header__container">
+                <div class="modes__container">
+                    <select name="modes" id="draw-select">
+                        <option value="dragdrop" selected>drag & drop</option>
+                        <option value="clickdraw" >click draw</option>
+                        <option value="drawnodes">draw complete graph</option>
+                    </select>
+                    <label for="draw-select__btn">
+                        <button class="btn-draw">Draw Complete Graph</button>
+                    </label>
+                </div>
+                <button class="btn-clear">Clear</button>
+            </div>
+        </div>
+
         <div class="wrapper">
             <!-- <label class="switch">
                 <input class="swicher-btn" type="checkbox">
                 <span class="slider round"></span>
               </label> -->
-            <div class="header">
-                <label for="draw-select">Choose draw mode:</label>
-                <select name="modes" id="draw-select">
-                    <option value="dragdrop" selected>drag & drop</option>
-                    <option value="clickdraw" >click draw</option>
-                    <option value="drawnodes">draw complete graph</option>
-                </select>
-                <label for="draw-select__btn">
-                    <button class="btn-draw">Draw Complete Graph</button>
-                </label>
-                <button class="btn-clear">Clear</button>
-            </div>
             <canvas id="graph-canvas"></canvas>
         </div>
     </div>
