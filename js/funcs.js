@@ -126,3 +126,16 @@ function clearAll() { //Функция очистки всех массивов 
     NodsLU.splice(0, NodsLU.length);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
+
+
+//Для Отрисовки полного графа по кол-ву вершин
+// let x_0 = canvas.width / 2;
+// let y_0 = canvas.height / 2;
+// let r = (canvas.height / 2) - 30;
+// let ver = 4
+
+// for (let i = 0; i < ver; i++) {
+//     let XX = (x_0 + (r * Math.cos(2 * Math.PI * i * Math.PI / ver)));
+//     let YY = (y_0 + (r * Math.sin(2 * Math.PI * i * Math.PI / ver)));
+//     drawNode(XX, YY, "Circle - 1");
+// }
