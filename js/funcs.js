@@ -57,26 +57,31 @@ function drawEdgesCoG() {
 
 }
 
-function drawBipGraph() {
+function drawBipGraph() { //Рисование двудольного графа
     clearAll();
     let aVar = document.querySelector('#aValue').valueAsNumber;
     let bVar = document.querySelector('#bValue').valueAsNumber;
     let iterBip = 0;
-    for (let i = 0; i < aVar; i++) { //Верхня линия
-        addNodesLU(i, (canvas.width / (aVar + 1)) * (i + 1), canvas.height / 3, "A - " + i);
-        drawNode(NodsLU[i].X, NodsLU[i].Y, NodsLU[i].label);
-        iterBip++;
-    }
+    if (aVar >= 1 && bVar >= 1) {
 
-    for (let j = 0; j < bVar; j++) { //Нижняя линия
-        addNodesLD(j, (canvas.width / (bVar + 1)) * (j + 1), canvas.height / 1.2, "B - " + j);
-        drawNode(NodsLD[j].X, NodsLD[j].Y, NodsLD[j].label);
-        iterBip++;
-    }
+        for (let i = 0; i < aVar; i++) { //Верхня линия
+            addNodesLU(i, (canvas.width / (aVar + 1)) * (i + 1), canvas.height / 3, "A - " + i);
+            drawNode(NodsLU[i].X, NodsLU[i].Y, NodsLU[i].label);
+            iterBip++;
+        }
 
-    for (let i = 0; i < NodsLU.length; i++)
-        for (let j = 0; j < NodsLD.length; j++)
-            drawEdges(NodsLU[i].X, NodsLU[i].Y, NodsLD[j].X, NodsLD[j].Y)
+        for (let j = 0; j < bVar; j++) { //Нижняя линия
+            addNodesLD(j, (canvas.width / (bVar + 1)) * (j + 1), canvas.height / 1.2, "B - " + j);
+            drawNode(NodsLD[j].X, NodsLD[j].Y, NodsLD[j].label);
+            iterBip++;
+        }
+
+        for (let i = 0; i < NodsLU.length; i++)
+            for (let j = 0; j < NodsLD.length; j++)
+                drawEdges(NodsLU[i].X, NodsLU[i].Y, NodsLD[j].X, NodsLD[j].Y)
+    } else {
+        alert("Incorrect values for a bipartite graph")
+    }
 
 
 }
