@@ -34,11 +34,28 @@
 .modes__container {
     display: flex;
     align-items: center;
+    height: 100%;
+}
+
+.modes__item {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid black;
+    padding: 0px 10px;
+}
+
+.modes__item-1 {
+    border-left: 1px solid black;
+}
+
+.modes__item:hover {
+    background-color: gray;
+    transition: 1s;
 }
 
 #draw-select {
     height: 30px;
-    border: 0;
     font-size: 15px;
     box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.4);
     border-radius: 2px;
@@ -53,7 +70,7 @@ button {
 
 .btn-draw {
     display: none;
-    margin-left: 30px;
+    margin-left: 10px;
 }
 
 .btn-draw.visible {
@@ -62,7 +79,6 @@ button {
 
 .biparGraph {
     display: flex;
-    margin-left: 20px;
     align-items: center;
 }
 

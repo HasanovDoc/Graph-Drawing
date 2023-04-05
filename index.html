@@ -15,27 +15,33 @@
         <div class="header">
             <div class="header__container">
                 <div class="modes__container">
-                    <select name="modes" id="draw-select">
-                        <option value="dragdrop" selected>drag & drop</option>
-                        <option value="clickdraw" >click draw</option>
-                        <option value="drawnodes">draw complete graph</option>
-                    </select>
-                    <label for="draw-select__btn">
-                        <button class="btn-draw">Draw Complete Graph</button>
-                    </label>
-                    <div class="biparGraph">
-                        <p>K<sub>i,</sub><sub>j</sub></p>
-                        <div class="inputs-graph">
-                            <p>
-                                <label for="aValue">i:</label>
-                                <input type="number" name="aValue" id="aValue">
-                            </p>
-                            <p>
-                                <label for="bValue">j:</label>
-                                <input type="number" name="" id="bValue">
-                            </p>
+                    <div class="modes__item modes__item-1">
+                        <select name="modes" id="draw-select">
+                            <option value="dragdrop" selected>drag & drop</option>
+                            <option value="clickdraw" >click draw</option>
+                            <option value="drawnodes">draw complete graph</option>
+                        </select>
+                        <label for="draw-select__btn">
+                            <button class="btn-draw">Draw Complete Graph</button>
+                        </label>
+                    </div>
+
+
+                    <div class="modes__item modes__item-2">
+                        <div class="biparGraph">
+                            <p>K<sub>i,</sub><sub>j</sub></p>
+                            <div class="inputs-graph">
+                                <p>
+                                    <label for="aValue">i:</label>
+                                    <input type="number" name="aValue" id="aValue">
+                                </p>
+                                <p>
+                                    <label for="bValue">j:</label>
+                                    <input type="number" name="" id="bValue">
+                                </p>
+                            </div>
+                            <button class="bip-btn">Draw bipartite graph</button>
                         </div>
-                        <button class="bip-btn">Draw bipartite graph</button>
                     </div>
                 </div>
                 <button class="btn-clear">Clear</button>
