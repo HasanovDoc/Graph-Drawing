@@ -54,7 +54,7 @@
     transition: 1s;
 }
 
-#draw-select {
+.draw-select {
     height: 30px;
     font-size: 15px;
     box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.4);
@@ -73,9 +73,11 @@ button {
     margin-left: 10px;
 }
 
-.btn-draw.visible {
+.visible {
     display: inherit;
 }
+
+.btn-draw.visible {}
 
 .biparGraph {
     display: flex;
@@ -101,6 +103,33 @@ button {
 
 .bip-btn {
     margin-left: 10px;
+}
+
+.libr-graphs_configs {
+    margin-left: 10px;
+}
+
+.configs__item {
+    transform: translateY(-2000%);
+    display: none;
+}
+
+.configs__item.visible {
+    display: inherit;
+    animation: ani 1s forwards;
+}
+
+@keyframes ani {
+    0% {
+        transform: translateY(-150%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.configs_input {
+    width: 40px;
 }
 
 #graph-canvas {

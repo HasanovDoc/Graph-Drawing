@@ -71,7 +71,7 @@ function drawBipGraph() { //Рисование двудольного графа
         }
 
         for (let j = 0; j < bVar; j++) { //Нижняя линия
-            addNodesLD(j, (canvas.width / (bVar + 1)) * (j + 1), canvas.height / 1.2, "B - " + j);
+            addNodesC(NodsLD, j, (canvas.width / (bVar + 1)) * (j + 1), canvas.height / 1.2, "B - " + j);
             drawNode(NodsLD[j].X, NodsLD[j].Y, NodsLD[j].label);
             iterBip++;
         }
@@ -86,6 +86,30 @@ function drawBipGraph() { //Рисование двудольного графа
 
 }
 
+function drawL_1() {
+    clearAll();
+    let numVert = document.querySelector('.configs_input-1').valueAsNumber;
+
+    //Для Отрисовки полного графа по кол - ву вершин
+    let x_0 = canvas.width / 2;
+    let y_0 = canvas.height / 2;
+    let r = (canvas.height / 2) - 30;
+    //let ver = 15
+
+    for (let i = 0; i < numVert; i++) {
+        let label = "Cir - " + i;
+        let XX = (x_0 + (r * Math.cos(2 * Math.PI * i / numVert)));
+        let YY = (y_0 + (r * Math.sin(2 * Math.PI * i / numVert)));
+        addNodesC(NodsC, i, XX, YY, label);
+    }
+
+    for (let i = 0; i < numVert; i++) {
+        for (let j = 0; j < i; j++)
+            drawEdges(NodsC[j].X, NodsC[j].Y, NodsC[i].X, NodsC[i].Y);
+    }
+    for (let i = 0; i < numVert; i++)
+        drawNode(NodsC[i].X, NodsC[i].Y, NodsC[i].label);
+}
 /////////////////////////////////////////////
 function addEdgs(src, tgt) { //Добавление ребра
     Edgs.push({ source: src, target: tgt });
@@ -95,8 +119,8 @@ function addNodesLU(id, x, y, label) { //Добавление вершины д�
     NodsLU.push({ id: id, X: x, Y: y, label: label });
 };
 
-function addNodesLD(id, x, y, label) { //Добавление вершины для двудольного графа, нижняя линия
-    NodsLD.push({ id: id, X: x, Y: y, label: label });
+function addNodesC(vNods, id, x, y, label) { //Добавление вершины
+    vNods.push({ id: id, X: x, Y: y, label: label });
 };
 
 function addNodes(id, x, y, label) { //Добавление вершины
@@ -122,25 +146,21 @@ function drawNode(x, y, label) { //функция отрисовки одной 
     ctx.fillText(label, x, y);
 };
 
+function clearArr(arr) {
+    arr.splice(0, arr.length)
+}
+
 function clearAll() { //Функция очистки всех массивов и холста
     iter = 0;
     iterCoGr = 0;
-    Nods.splice(0, Nods.length);
-    Edgs.splice(0, Edgs.length);
-    NodsLD.splice(0, NodsLD.length);
-    NodsLU.splice(0, NodsLU.length);
+    clearArr(Nods);
+    clearArr(NodsLD);
+    clearArr(NodsLU);
+    clearArr(Edgs);
+    clearArr(NodsC);
+    //Nods.splice(0, Nods.length);
+    // Edgs.splice(0, Edgs.length);
+    // NodsLD.splice(0, NodsLD.length);
+    // NodsLU.splice(0, NodsLU.length);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
-
-
-//Для Отрисовки полного графа по кол - ву вершин
-// let x_0 = canvas.width / 2;
-// let y_0 = canvas.height / 2;
-// let r = (canvas.height / 2) - 30;
-// let ver = 15
-
-// for (let i = 0; i < ver; i++) {
-//     let XX = (x_0 + (r * Math.cos(2 * Math.PI * i / ver)));
-//     let YY = (y_0 + (r * Math.sin(2 * Math.PI * i / ver)));
-//     drawNode(XX, YY, "Circle - 1");
-// }

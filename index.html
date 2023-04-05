@@ -16,7 +16,7 @@
             <div class="header__container">
                 <div class="modes__container">
                     <div class="modes__item modes__item-1">
-                        <select name="modes" id="draw-select">
+                        <select name="modes" id="draw-select" class="draw-select">
                             <option value="dragdrop" selected>drag & drop</option>
                             <option value="clickdraw" >click draw</option>
                             <option value="drawnodes">draw complete graph</option>
@@ -25,7 +25,6 @@
                             <button class="btn-draw">Draw Complete Graph</button>
                         </label>
                     </div>
-
 
                     <div class="modes__item modes__item-2">
                         <div class="biparGraph">
@@ -41,6 +40,27 @@
                                 </p>
                             </div>
                             <button class="bip-btn">Draw bipartite graph</button>
+                        </div>
+                    </div>
+
+                    <div class="modes__item modes__item-3">
+                        <select name="" id="libr-graphs" class="draw-select libr-graphs">
+                            <option value="drawCompl">Draw complete circle graph</option>
+                            <option value="">test-2</option>
+                            <option value="">test-3</option>
+                        </select>
+                        <div class="libr-graphs_configs">
+                            <div class="configs__item configs__item-1 visible">
+                                <label for="">num. of vert.</label>
+                                <input type="number" class="configs_input configs_input-1">
+                                <!-- <button class="configs_button configs_btn-1">Draw</button> -->
+                            </div>
+                            <div class="configs__item configs__item-2">
+                                <label for="">test-2</label>
+                            </div>
+                            <div class="configs__item configs__item-3">
+                                <label for="">test-3</label>
+                            </div>
                         </div>
                     </div>
                 </div>
