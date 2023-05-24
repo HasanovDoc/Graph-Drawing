@@ -17,7 +17,7 @@ canvas.addEventListener('mousedown', DaDM);
 canvas.addEventListener('click', DaDC);
 
 drawMode.addEventListener('change', () => { //Режим рисования графов
-    clearAll();
+    //clearAll();
     btnDrawedges.classList.remove('visible');
     if (drawMode.selectedIndex == 1) {
         canvas.removeEventListener('mousedown', DaDM);
@@ -64,4 +64,19 @@ librGraph.addEventListener('change', () => {
         confItems[1].classList.add('visible');
 
     }
+});
+
+//Перемещение вершин
+const btnMove = document.querySelector('.btn-move');
+
+btnMove.addEventListener("click", () => {
+    canvas.removeEventListener("mousedown", DaDM);
+    canvas.removeEventListener("click", DaDC);
+    canvas.removeEventListener("click", drawC);
+    canvas.removeEventListener("click", drawNodesCoG);
+    btnDrawedges.removeEventListener("click", drawEdgesCoG);
+
+    canvas.addEventListener("mousedown", startDragging);
+    canvas.addEventListener("mousemove", drag);
+    canvas.addEventListener("mouseup", stopDragging);
 });

@@ -14,7 +14,7 @@ function DaDC(event) {
     drawNode(event.offsetX, event.offsetY, label);
 
     if (Nods.length >= 2) {
-        //addEdgs(iter - 1, iter);
+        addEdgs(iter - 1, iter);
         drawEdges(Nods[iter - 1].X, Nods[iter - 1].Y, Nods[iter].X, Nods[iter].Y);
     }
 
@@ -27,7 +27,7 @@ function drawC(event) { //По клику рисовать вершины.
     drawNode(event.offsetX, event.offsetY, label);
     addNodes(iter, event.offsetX, event.offsetY, label);
     if (iter >= 1) {
-        //addEdgs(iter - 1, iter);
+        addEdgs(iter - 1, iter);
         drawEdges(Nods[iter - 1].X, Nods[iter - 1].Y, Nods[iter].X, Nods[iter].Y);
     }
     iter++;
@@ -77,8 +77,10 @@ function drawBipGraph() { //Рисование двудольного графа
         }
 
         for (let i = 0; i < NodsLU.length; i++)
-            for (let j = 0; j < NodsLD.length; j++)
-                drawEdges(NodsLU[i].X, NodsLU[i].Y, NodsLD[j].X, NodsLD[j].Y)
+            for (let j = 0; j < NodsLD.length; j++) {
+                addEdgs(i, j);
+                drawEdges(NodsLU[i].X, NodsLU[i].Y, NodsLD[j].X, NodsLD[j].Y);
+            }
     } else {
         alert("Incorrect values for a bipartite graph")
     }
@@ -110,6 +112,86 @@ function drawL_1() {
     for (let i = 0; i < numVert; i++)
         drawNode(NodsC[i].X, NodsC[i].Y, NodsC[i].label);
 }
+///////////Перемещение вершин
+let isDragging = false;
+let selectedNode = null;
+let offsetX = 0;
+let offsetY = 0;
+
+function startDragging(event) {
+    let mouseX = event.offsetX;
+    let mouseY = event.offsetY;
+
+    // Проверяем, находится ли курсор над какой-либо вершиной
+    for (let node of Nods) {
+        let distance = Math.sqrt((mouseX - node.X) ** 2 + (mouseY - node.Y) ** 2);
+        if (distance <= 20) {
+            isDragging = true;
+            selectedNode = node;
+            offsetX = mouseX - selectedNode.X;
+            offsetY = mouseY - selectedNode.Y;
+            break;
+        }
+    }
+}
+
+function drag(event) {
+    if (isDragging && selectedNode) {
+        const mouseX = event.offsetX;
+        const mouseY = event.offsetY;
+
+        // Обновляем координаты вершины
+        selectedNode.X = mouseX - offsetX;
+        selectedNode.Y = mouseY - offsetY;
+
+        // Очищаем холст и перерисовываем граф
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        redrawGraph();
+    }
+}
+
+function stopDragging() {
+    isDragging = false;
+    selectedNode = null;
+}
+
+function redrawGraph() {
+    //ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (const node of Nods) {
+        drawNode(node.X, node.Y, node.label);
+    }
+
+    for (const node of NodsLU) {
+        drawNode(node.X, node.Y, node.label);
+    }
+
+    for (const node of NodsLD) {
+        drawNode(node.X, node.Y, node.label);
+    }
+
+    for (const node of NodsC) {
+        drawNode(node.X, node.Y, node.label);
+    }
+
+    for (const edge of Edgs) {
+        const sourceNode = getNodeById(edge.source);
+        const targetNode = getNodeById(edge.target);
+
+        if (sourceNode && targetNode) {
+            drawEdges(sourceNode.X, sourceNode.Y, targetNode.X, targetNode.Y);
+        }
+    }
+}
+
+function getNodeById(id) {
+    return Nods.find((node) => node.id === id) ||
+        NodsLU.find((node) => node.id === id) ||
+        NodsLD.find((node) => node.id === id) ||
+        NodsC.find((node) => node.id === id);
+}
+
+
 /////////////////////////////////////////////
 function addEdgs(src, tgt) { //Добавление ребра
     Edgs.push({ source: src, target: tgt });
