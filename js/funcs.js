@@ -263,9 +263,5 @@ function clearAll() { //Функция очистки всех массивов 
     clearArr(NodsLU);
     clearArr(Edgs);
     clearArr(NodsC);
-    //Nods.splice(0, Nods.length);
-    // Edgs.splice(0, Edgs.length);
-    // NodsLD.splice(0, NodsLD.length);
-    // NodsLU.splice(0, NodsLU.length);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }

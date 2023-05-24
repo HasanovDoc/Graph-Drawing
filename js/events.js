@@ -66,17 +66,31 @@ librGraph.addEventListener('change', () => {
     }
 });
 
-//Перемещение вершин
+///////Перемещение вершин
 const btnMove = document.querySelector('.btn-move');
-
+let moveActive = false;
 btnMove.addEventListener("click", () => {
-    canvas.removeEventListener("mousedown", DaDM);
-    canvas.removeEventListener("click", DaDC);
-    canvas.removeEventListener("click", drawC);
-    canvas.removeEventListener("click", drawNodesCoG);
-    btnDrawedges.removeEventListener("click", drawEdgesCoG);
+    if (!moveActive) {
+        canvas.removeEventListener("mousedown", DaDM);
+        canvas.removeEventListener("click", DaDC);
+        canvas.removeEventListener("click", drawC);
+        canvas.removeEventListener("click", drawNodesCoG);
+        btnDrawedges.removeEventListener("click", drawEdgesCoG);
 
-    canvas.addEventListener("mousedown", startDragging);
-    canvas.addEventListener("mousemove", drag);
-    canvas.addEventListener("mouseup", stopDragging);
+        canvas.addEventListener("mousedown", startDragging);
+        canvas.addEventListener("mousemove", drag);
+        canvas.addEventListener("mouseup", stopDragging);
+
+        moveActive = true;
+
+        btnMove.classList.add('active-move');
+    } else {
+        btnMove.classList.remove('active-move');
+
+        canvas.removeEventListener("mousedown", startDragging);
+        canvas.removeEventListener("mousemove", drag);
+        canvas.removeEventListener("mouseup", stopDragging);
+
+        moveActive = false;
+    }
 });
