@@ -1,10 +1,28 @@
+let isSelect = false
+let selNode = null
+
 function DaDM(event) {
-    let label = "Node - " + iter;
+    isSelect = false
+    selNode = null
+    let mouseX = event.offsetX;
+    let mouseY = event.offsetY;
+    for (let node of Nods) {
+        let distance = Math.sqrt((mouseX - node.X) ** 2 + (mouseY - node.Y) ** 2);
+        if (distance <= 20) {
+            isSelect = true
+            selNode = node;
+            break;
+        }
+    }
+    if (!isSelect) {
+        let label = "Node - " + iter;
 
-    addNodes(iter, event.offsetX, event.offsetY, label);
-    drawNode(event.offsetX, event.offsetY, label);
+        addNodes(iter, event.offsetX, event.offsetY, label);
+        drawNode(event.offsetX, event.offsetY, label);
 
-    iter++
+        iter++
+    }
+
 };
 
 function DaDC(event) {
@@ -13,9 +31,16 @@ function DaDC(event) {
     addNodes(iter, event.offsetX, event.offsetY, label);
     drawNode(event.offsetX, event.offsetY, label);
 
-    if (Nods.length >= 2) {
-        addEdgs(iter - 1, iter);
-        drawEdges(Nods[iter - 1].X, Nods[iter - 1].Y, Nods[iter].X, Nods[iter].Y);
+    if (!isSelect) {
+        if (Nods.length >= 2) {
+            addEdgs(iter - 1, iter);
+            drawEdges(Nods[iter - 1].X, Nods[iter - 1].Y, Nods[iter].X, Nods[iter].Y);
+        }
+    } else {
+        if (Nods.length >= 2) {
+            addEdgs(selNode.id, iter);
+            drawEdges(Nods[selNode.id].X, Nods[selNode.id].Y, Nods[iter].X, Nods[iter].Y);
+        }
     }
 
     iter++
@@ -156,8 +181,6 @@ function stopDragging() {
 }
 
 function redrawGraph() {
-    //ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     for (const node of Nods) {
         drawNode(node.X, node.Y, node.label);
     }
