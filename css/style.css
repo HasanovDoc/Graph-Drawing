@@ -132,6 +132,10 @@ button {
     width: 40px;
 }
 
+.active-move {
+    background-color: rgb(62, 62, 123);
+}
+
 #graph-canvas {
     border: 1px solid black;
     z-index: 2;
