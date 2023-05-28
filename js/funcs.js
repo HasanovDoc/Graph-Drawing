@@ -90,7 +90,7 @@ function drawBipGraph() { //Рисование двудольного графа
     if (aVar >= 1 && bVar >= 1) {
 
         for (let i = 0; i < aVar; i++) { //Верхня линия
-            addNodesLU(i, (canvas.width / (aVar + 1)) * (i + 1), canvas.height / 3, "A - " + i);
+            addNodesC(NodsLU, i, (canvas.width / (aVar + 1)) * (i + 1), canvas.height / 3, "A - " + i);
             drawNode(NodsLU[i].X, NodsLU[i].Y, NodsLU[i].label);
             iterBip++;
         }
@@ -131,8 +131,10 @@ function drawL_1() {
     }
 
     for (let i = 0; i < numVert; i++) {
-        for (let j = 0; j < i; j++)
+        for (let j = 0; j < i; j++) {
+            addEdgs(j, i);
             drawEdges(NodsC[j].X, NodsC[j].Y, NodsC[i].X, NodsC[i].Y);
+        }
     }
     for (let i = 0; i < numVert; i++)
         drawNode(NodsC[i].X, NodsC[i].Y, NodsC[i].label);
@@ -149,6 +151,17 @@ function startDragging(event) {
 
     // Проверяем, находится ли курсор над какой-либо вершиной
     for (let node of Nods) {
+        let distance = Math.sqrt((mouseX - node.X) ** 2 + (mouseY - node.Y) ** 2);
+        if (distance <= 20) {
+            isDragging = true;
+            selectedNode = node;
+            offsetX = mouseX - selectedNode.X;
+            offsetY = mouseY - selectedNode.Y;
+            break;
+        }
+    }
+
+    for (let node of NodsC) {
         let distance = Math.sqrt((mouseX - node.X) ** 2 + (mouseY - node.Y) ** 2);
         if (distance <= 20) {
             isDragging = true;
