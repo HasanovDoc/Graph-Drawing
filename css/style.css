@@ -7,7 +7,7 @@
 
 .container {
     z-index: -1;
-    background-color: gray;
+    background-color: #1A1A1D;
 }
 
 .wrapper {
@@ -133,11 +133,12 @@ button {
 }
 
 .active-move {
-    background-color: rgb(62, 62, 123);
+    background-color: #6F2232;
 }
 
 #graph-canvas {
     border: 1px solid black;
     z-index: 2;
-    background-color: rgb(165, 174, 174);
+    /* background-color: rgb(165, 174, 174); */
+    background-color: #4E4E50;
 }
