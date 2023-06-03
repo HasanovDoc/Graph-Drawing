@@ -6,58 +6,97 @@ const canvas = document.querySelector('#graph-canvas'),
 canvas.width = wrapper.offsetWidth;
 canvas.height = window.innerHeight;
 
-// // Определяем параметры графа
-// const nodes = [
-//     { id: 1, x: 100, y: 100, label: 'Node 1' },
-//     { id: 2, x: 300, y: 100, label: 'Node 2' },
-//     { id: 3, x: 200, y: 250, label: 'Node 3' },
-//     { id: 4, x: 500, y: 150, label: 'Node 4' },
-//     { id: 5, x: 600, y: 300, label: 'Node 5' },
-// ];
+//Обход графа в глубину
 
-// const edges = [
-//     { source: 1, target: 2 },
-//     { source: 1, target: 3 },
-//     { source: 2, target: 3 },
-//     { source: 2, target: 4 },
-//     { source: 3, target: 5 },
-//     { source: 4, target: 5 },
-// ];
+const btnSearchDeph = document.querySelector('.btn-SearchDeph');
 
-// //edges.push(10, 10);
+btnSearchDeph.addEventListener('click', () => {
+    canvas.removeEventListener("mousedown", DaDM);
+    canvas.removeEventListener("click", DaDC);
+    canvas.removeEventListener("click", drawC);
+    canvas.removeEventListener("click", drawNodesCoG);
+    btnDrawedges.removeEventListener("click", drawEdgesCoG);
 
-// // Определяем функцию отрисовки графа
-// function drawGraph() {
-//     // Очищаем холст перед отрисовкой
-//     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let startNode = null;
 
-//     // Рисуем ребра
-//     edges.forEach(edge => {
-//         const sourceNode = nodes.find(node => node.id === edge.source);
-//         const targetNode = nodes.find(node => node.id === edge.target);
+    canvas.addEventListener('click', function(event) {
+        const mouseX = event.offsetX;
+        const mouseY = event.offsetY;
 
-//         ctx.beginPath();
-//         ctx.moveTo(sourceNode.x, sourceNode.y);
-//         ctx.lineTo(targetNode.x, targetNode.y);
-//         ctx.stroke();
-//     });
+        // Проверяем, было ли произведено нажатие на вершину
+        for (const node of Nods) {
+            const distance = Math.sqrt((mouseX - node.X) ** 2 + (mouseY - node.Y) ** 2);
+            if (distance <= 20) {
+                startNode = node;
+                break;
+            }
+        }
 
-//     // Рисуем узлы
-//     nodes.forEach(node => {
-//         ctx.beginPath();
-//         ctx.fillStyle = 'black';
-//         ctx.arc(node.x, node.y, 20, 0, 2 * Math.PI);
-//         ctx.fill();
-//         console.log("node - ", node);
+        if (startNode) {
+            // Очищаем все предыдущие выделения
+            clearSelection();
+            // Запускаем алгоритм DFS
+            const visited = new Set(); // Множество посещенных вершин
+            dfs(startNode, visited);
 
+            // Определение функции DFS
+            function dfs(node, visited) {
+                visited.add(node);
+                selectNode(node); // Выделяем текущую вершину
 
-//         ctx.fillStyle = 'white';
-//         ctx.textAlign = 'center';
-//         ctx.textBaseline = 'middle';
-//         ctx.fillText(node.label, node.x, node.y);
-//     });
-// }
+                // Рекурсивно запускаем DFS для всех соседних вершин
+                const neighbors = findNeighbors(node);
+                for (const neighbor of neighbors) {
+                    if (!visited.has(neighbor)) {
+                        dfs(neighbor, visited);
+                    }
+                }
+            }
 
-// // Вызываем функцию отрисовки графа
-// drawGraph();
-// //drawNode();
+            // Определение функции для поиска соседних вершин
+            function findNeighbors(node) {
+                const neighbors = [];
+
+                // Проходим по всем ребрам и ищем соседние вершины для данной вершины
+                for (const edge of Edgs) {
+                    if (edge.source === node.id) {
+                        const neighbor = Nods.find((n) => n.id === edge.target);
+                        if (neighbor) {
+                            neighbors.push(neighbor);
+                        }
+                    } else if (edge.target === node.id) {
+                        const neighbor = Nods.find((n) => n.id === edge.source);
+                        if (neighbor) {
+                            neighbors.push(neighbor);
+                        }
+                    }
+                }
+
+                return neighbors;
+            }
+
+            // Определение функции для выделения вершины
+            function selectNode(node) {
+                ctx.beginPath();
+                ctx.fillStyle = 'red';
+                ctx.arc(node.X, node.Y, 20, 0, 2 * Math.PI);
+                ctx.fill();
+
+                ctx.fillStyle = 'white';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(node.label, node.X, node.Y);
+            }
+
+            // Определение функции для очистки выделений
+            function clearSelection() {
+                for (const node of Nods) {
+                    drawNode(node.X, node.Y, node.label);
+                }
+            }
+        } else {
+            console.log("error");
+
+        }
+    });
+});
