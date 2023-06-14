@@ -18,25 +18,18 @@ canvas.addEventListener('click', DaDC);
 
 drawMode.addEventListener('change', () => { //Режим рисования графов
     //clearAll();
+    removerEventDrawMode();
     btnDrawedges.classList.remove('visible');
     if (drawMode.selectedIndex == 1) {
-        canvas.removeEventListener('mousedown', DaDM);
-        canvas.removeEventListener('click', DaDC);
-        canvas.removeEventListener('click', drawNodesCoG);
 
         canvas.addEventListener('click', drawC);
     } else if (drawMode.selectedIndex == 0) {
-        canvas.removeEventListener('click', drawC);
-        canvas.removeEventListener('click', drawNodesCoG);
 
         //Рисование путем Drag&Drop
         canvas.addEventListener('mousedown', DaDM);
         canvas.addEventListener('click', DaDC);
         /////////////////////////
     } else if (drawMode.selectedIndex == 2) {
-        canvas.removeEventListener('click', drawC);
-        canvas.removeEventListener('mousedown', DaDM);
-        canvas.removeEventListener('click', DaDC);
 
         canvas.addEventListener('click', drawNodesCoG);
         btnDrawedges.addEventListener('click', drawEdgesCoG);

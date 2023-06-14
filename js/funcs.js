@@ -279,7 +279,12 @@ function clearAll() { //Функция очистки всех массивов 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-
+function removeEventDrawMode() {
+    canvas.removeEventListener('mousedown', DaDM);
+    canvas.removeEventListener('click', DaDC);
+    canvas.removeEventListener('click', drawNodesCoG);
+    canvas.removeEventListener('click', drawC);
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Вывод подсказки на экран
