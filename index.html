@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
@@ -27,26 +27,9 @@
                     </div>
 
                     <div class="modes__item modes__item-2">
-                        <div class="biparGraph">
-                            <p>K<sub>i,</sub><sub>j</sub></p>
-                            <div class="inputs-graph">
-                                <p>
-                                    <label for="aValue">i:</label>
-                                    <input type="number" name="aValue" id="aValue">
-                                </p>
-                                <p>
-                                    <label for="bValue">j:</label>
-                                    <input type="number" name="" id="bValue">
-                                </p>
-                            </div>
-                            <button class="bip-btn">Draw bipartite graph</button>
-                        </div>
-                    </div>
-
-                    <div class="modes__item modes__item-3">
                         <select name="" id="libr-graphs" class="draw-select libr-graphs">
                             <option value="drawCompl">Draw complete circle graph</option>
-                            <option value="">test-2</option>
+                            <option value="">Draw biparate graph</option>
                             <option value="">test-3</option>
                         </select>
                         <div class="libr-graphs_configs">
@@ -56,12 +39,34 @@
                                 <!-- <button class="configs_button configs_btn-1">Draw</button> -->
                             </div>
                             <div class="configs__item configs__item-2">
-                                <label for="">test-2</label>
+
+                                <div class="biparGraph">
+                                    <p>K<sub>i,</sub><sub>j</sub></p>
+                                    <div class="inputs-graph">
+                                        <p>
+                                            <label for="aValue">i:</label>
+                                            <input type="number" name="aValue" id="aValue">
+                                        </p>
+                                        <p>
+                                            <label for="bValue">j:</label>
+                                            <input type="number" name="" id="bValue">
+                                        </p>
+                                    </div>
+                                    <button class="bip-btn">Draw bipartite graph</button>
+                                </div>
+
                             </div>
                             <div class="configs__item configs__item-3">
                                 <label for="">test-3</label>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="modes__item modes__item-3">
+                        <select name="" id="algorithms">
+                            <option disabled selected value>Алгоритмы</option>
+                            <option value="searchDepht">Поиск в глубину</option>
+                        </select>
                     </div>
                 </div>
                 <button class="btn-move">Moving</button>
@@ -71,6 +76,9 @@
         </div>
 
         <div class="wrapper">
+            <div class="tool-tip">
+                <p class="tip__text">Режим рисования drag&drop</p>
+            </div>
             <!-- <label class="switch">
                 <input class="swicher-btn" type="checkbox">
                 <span class="slider round"></span>

@@ -5,8 +5,15 @@
     box-sizing: border-box;
 }
 
+select {
+    height: 30px;
+    font-size: 15px;
+    box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.4);
+    border-radius: 2px;
+}
+
 .container {
-    z-index: -1;
+    z-index: 10;
     background-color: #1A1A1D;
 }
 
@@ -19,6 +26,7 @@
 .header {
     min-width: 100%;
     height: 55px;
+    z-index: 50;
     background-color: rgba(81, 79, 79, 0.584);
 }
 
@@ -136,9 +144,33 @@ button {
     background-color: #6F2232;
 }
 
+.wrapper {
+    max-width: 75%;
+    margin: 0 auto;
+}
+
+.tool-tip {
+    margin-top: 2px;
+    margin-bottom: 1px;
+    width: 1122.78px;
+    height: 80px;
+    background-color: rgb(4, 61, 40);
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.tip__text {
+    text-align: center;
+    justify-self: center;
+    align-self: center;
+    color: white;
+}
+
 #graph-canvas {
     border: 1px solid black;
-    z-index: 2;
+    z-index: 4;
     /* background-color: rgb(165, 174, 174); */
     background-color: #4E4E50;
 }
