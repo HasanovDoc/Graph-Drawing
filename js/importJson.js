@@ -1,6 +1,7 @@
 const importBtn = document.querySelector('.importGraph');
 const popUp = document.querySelector('.popUp__container');
 const btnSendJson = document.querySelector('.btn-sendJson');
+const inputJsonFile = document.querySelector('.inputJsonFile');
 
 //Вызов popUm меню
 importBtn.addEventListener('click', () => {
@@ -18,7 +19,19 @@ btnSendJson.addEventListener('click', () => {
 
     let jsonTxt = document.querySelector('.inputJsonTxt').value;
     if (!jsonTxt) {
-        console.log("Nothing");
+        let file = inputJsonFile.files[0];
+        let reader = new FileReader();
+
+        reader.readAsText(file);
+        reader.onload = function() {
+            let jsonObjFile = JSON.parse(reader.result)
+            drawGraphByJson(jsonObjFile);
+            popUp.classList.remove('visible');
+        };
+
+        reader.onerror = function() {
+            alert(reader.error);
+        };
 
     } else {
         let jsonObjTxt = JSON.parse(jsonTxt)
