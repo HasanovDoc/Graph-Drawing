@@ -70,6 +70,7 @@
                     </div>
                 </div>
                 <button class="btn-move">Moving</button>
+                <button class="importGraph">Import Graph</button>
                 <button class="btn-SearchDeph">Search Depht</button>
                 <button class="btn-clear">Clear</button>
             </div>
@@ -86,10 +87,20 @@
             <canvas id="graph-canvas"></canvas>
         </div>
     </div>
+
+    <div class="popUp__container">
+        <div class="popUp__import">
+            <!-- <input class="inputJsonTxt" type="text" placeholder="json строка"> -->
+            <textarea name="inputJsonTxt" class="inputJsonTxt" id="" cols="30" rows="10" placeholder="json строка"></textarea>
+            <input type="file" class="inputJsonFile">
+            <button class="btn-sendJson">Отправить</button>
+        </div>
+    </div>
 </body>
 
 <script src="./js/graph.js"></script>
 <script src="./js/funcs.js"></script>
 <script src="./js/events.js"></script>
+<script src="./js/importJson.js"></script>
 
 </html>

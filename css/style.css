@@ -81,11 +81,9 @@ button {
     margin-left: 10px;
 }
 
-.visible {
+.configs__item.visible {
     display: inherit;
 }
-
-.btn-draw.visible {}
 
 .biparGraph {
     display: flex;
@@ -173,4 +171,47 @@ button {
     z-index: 4;
     /* background-color: rgb(165, 174, 174); */
     background-color: #4E4E50;
+}
+
+.popUp__container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.49);
+    justify-content: center;
+    align-items: center;
+    display: none;
+    z-index: 10;
+}
+
+.popUp__container.visible {
+    display: flex;
+}
+
+.popUp__import {
+    width: 30%;
+    height: 50%;
+    padding: 5px;
+    background-color: rgb(4, 61, 40);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 5px;
+    border: 1px solid black;
+    z-index: 20;
+}
+
+.inputJsonTxt {
+    max-width: 100%;
+    height: 70%;
+    border-radius: 5px;
+}
+
+.inputJsonFile {
+    margin-top: 10px;
+}
+
+.btn-sendJson {
+    margin: 0 auto;
 }

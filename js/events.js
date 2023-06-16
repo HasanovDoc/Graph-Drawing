@@ -18,7 +18,7 @@ canvas.addEventListener('click', DaDC);
 
 drawMode.addEventListener('change', () => { //Режим рисования графов
     //clearAll();
-    removerEventDrawMode();
+    removeEventDrawMode();
     btnDrawedges.classList.remove('visible');
     if (drawMode.selectedIndex == 1) {
 
