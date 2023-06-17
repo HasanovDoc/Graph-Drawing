@@ -87,3 +87,29 @@ btnMove.addEventListener("click", () => {
         moveActive = false;
     }
 });
+
+////////////////Алгоритмы
+const algoritm = document.querySelector('#algorithms');
+console.log();
+
+algoritm.addEventListener('change', () => {
+    switch (algoritm.selectedIndex) {
+        case 1:
+            canvas.removeEventListener("mousedown", DaDM);
+            canvas.removeEventListener("click", DaDC);
+            canvas.removeEventListener("click", drawC);
+            canvas.removeEventListener("click", drawNodesCoG);
+            btnDrawedges.removeEventListener("click", drawEdgesCoG);
+
+            printTip('Выберите начальную вершину', true)
+
+            let startNode = null;
+
+            canvas.addEventListener('click', searchDepth);
+
+            break;
+
+        default:
+            break;
+    }
+})

@@ -215,3 +215,7 @@ button {
 .btn-sendJson {
     margin: 0 auto;
 }
+
+.visible {
+    display: block;
+}
