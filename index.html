@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/globalEl.css">
     <link rel="icon" type="image" href="./img/favicon.png">
     <title>Graph</title>
 </head>
@@ -34,8 +35,8 @@
                         </select>
                         <div class="libr-graphs_configs">
                             <div class="configs__item configs__item-1 visible">
-                                <label for="">num. of vert.</label>
-                                <input type="number" class="configs_input configs_input-1">
+                                <label for="">Кол-во вершин</label>
+                                <input type="number" class="configs_input configs_input-1" placeholder="0">
                                 <!-- <button class="configs_button configs_btn-1">Draw</button> -->
                             </div>
                             <div class="configs__item configs__item-2">
@@ -62,16 +63,16 @@
                         </div>
                     </div>
 
-                    <div class="modes__item modes__item-3">
+                    <div class="modes__item modes__item-4">
                         <select name="" id="algorithms">
-                            <option disabled selected value>Алгоритмы</option>
+                            <option disabled selected value="hide">Алгоритмы</option>
                             <option value="searchDepht">Поиск в глубину</option>
                         </select>
                     </div>
                 </div>
-                <button class="btn-move">Moving</button>
-                <button class="importGraph">Import Graph</button>
-                <button class="btn-clear">Clear</button>
+                <button class="btn-move">Перемещение</button>
+                <button class="importGraph">Импорт графа</button>
+                <button class="btn-clear">Очистка</button>
             </div>
         </div>
 
