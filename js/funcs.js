@@ -1,9 +1,10 @@
 let isSelect = false
 let selNode = null
 
-function DaDM(event) {
+function DaDM(event) { //Рисовать drag&drop, drag
     isSelect = false
     selNode = null
+
     let mouseX = event.offsetX;
     let mouseY = event.offsetY;
     for (let node of Nods) {
@@ -25,7 +26,7 @@ function DaDM(event) {
 
 };
 
-function DaDC(event) {
+function DaDC(event) { //Рисовать drag&drop, drop
     let label = "Node - " + iter;
 
     addNodes(iter, event.offsetX, event.offsetY, label);
@@ -51,28 +52,33 @@ function drawC(event) { //По клику рисовать вершины.
 
     drawNode(event.offsetX, event.offsetY, label);
     addNodes(iter, event.offsetX, event.offsetY, label);
-    if (iter >= 1) {
-        addEdgs(iter - 1, iter);
-        drawEdges(Nods[iter - 1].X, Nods[iter - 1].Y, Nods[iter].X, Nods[iter].Y);
-    }
+    // if (iter >= 1) {
+    //     addEdgs(iter - 1, iter);
+    //     drawEdges(Nods[iter - 1].X, Nods[iter - 1].Y, Nods[iter].X, Nods[iter].Y);
+    // }
     iter++;
 
 };
 
-function drawNodesCoG(event) { //Рисовать вершины по клику для отрисовки полного графа
-    let label = "CG: " + iterCoGr;
+let [isSelect_1, selectNode_1] = [];
+let [isSelect_2, selectNode_2] = [];
 
-    drawNode(event.offsetX, event.offsetY, label);
-    addNodes(iterCoGr, event.offsetX, event.offsetY, label);
-    if (iterCoGr >= 0) {
-        for (let index = 0; index < iterCoGr; index++) {
-            addEdgs(iterCoGr, index);
-            //drawEdges(Nods[iterCoGr].X, Nods[iterCoGr].Y, Nods[index].X, Nods[index].Y);
-            btnDrawedges.classList.add('visible');
-        }
+function drawEdgeDrag(event) { //Рисовать ребра между вершинами drag
+
+    [isSelect_1, selectNode_1] = isSelected(event);
+    btnDrawedges.classList.add('visible');
+}
+
+function drawEdgeDrop(event) { //Рисовать ребра между вершинами drop
+    [isSelect_2, selectNode_2] = isSelected(event);
+
+    if (isSelect_1 && isSelect_2) {
+
+        addEdgs(selectNode_1.id, selectNode_2.id);
+        drawEdges(Nods[selectNode_1.id].X, Nods[selectNode_1.id].Y, Nods[selectNode_2.id].X, Nods[selectNode_2.id].Y);
+
     }
 
-    iterCoGr++;
 }
 
 function drawEdgesCoG() {
@@ -282,10 +288,29 @@ function clearAll() { //Функция очистки всех массивов 
 function removeEventDrawMode() {
     canvas.removeEventListener('mousedown', DaDM);
     canvas.removeEventListener('click', DaDC);
-    canvas.removeEventListener('click', drawNodesCoG);
+    canvas.removeEventListener('click', drawEdgeDrag);
     canvas.removeEventListener('click', drawC);
     canvas.removeEventListener('click', searchDepth);
     canvas.removeEventListener('click', searchBreadth);
+    canvas.removeEventListener('mousedown', drawEdgeDrag);
+    canvas.removeEventListener('mouseup', drawEdgeDrop);
+}
+
+function isSelected(event) {
+    let isSelect = false
+    let selNode = null
+
+    let mouseX = event.offsetX;
+    let mouseY = event.offsetY;
+    for (let node of Nods) {
+        let distance = Math.sqrt((mouseX - node.X) ** 2 + (mouseY - node.Y) ** 2);
+        if (distance <= 20) {
+            isSelect = true
+            selNode = node;
+            break;
+        }
+    }
+    return [isSelect, selNode];
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -31,7 +31,10 @@ drawMode.addEventListener('change', () => { //Режим рисования гр
         /////////////////////////
     } else if (drawMode.selectedIndex == 2) {
 
-        canvas.addEventListener('click', drawNodesCoG);
+        printTip("Нажмите и удерживайте, чтобы соединить вершины", true)
+        canvas.addEventListener('mousedown', drawEdgeDrag);
+        canvas.addEventListener('mouseup', drawEdgeDrop);
+
         btnDrawedges.addEventListener('click', drawEdgesCoG);
     }
 });
