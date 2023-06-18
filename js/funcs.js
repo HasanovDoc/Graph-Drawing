@@ -284,6 +284,8 @@ function removeEventDrawMode() {
     canvas.removeEventListener('click', DaDC);
     canvas.removeEventListener('click', drawNodesCoG);
     canvas.removeEventListener('click', drawC);
+    canvas.removeEventListener('click', searchDepth);
+    canvas.removeEventListener('click', searchBreadth);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -316,6 +318,7 @@ function searchDepth(event) {
     const mouseY = event.offsetY;
 
     // Проверяем, было ли произведено нажатие на вершину
+    let startNode = null;
     for (const node of Nods) {
         const distance = Math.sqrt((mouseX - node.X) ** 2 + (mouseY - node.Y) ** 2);
         if (distance <= 20) {
@@ -419,4 +422,116 @@ function searchDepth(event) {
 
     }
     canvas.removeEventListener('click', searchDepth);
+}
+
+//Алгоритм поиска в ширину
+function searchBreadth(event) {
+    printTip("Порядок обхода: ", true);
+    const mouseX = event.offsetX;
+    const mouseY = event.offsetY;
+
+    // Проверяем, было ли произведено нажатие на вершину
+    let startNode = null;
+    for (const node of Nods) {
+        const distance = Math.sqrt((mouseX - node.X) ** 2 + (mouseY - node.Y) ** 2);
+        if (distance <= 20) {
+            startNode = node;
+            break;
+        }
+    }
+
+    for (const node of NodsC) {
+        const distance = Math.sqrt((mouseX - node.X) ** 2 + (mouseY - node.Y) ** 2);
+        if (distance <= 20) {
+            startNode = node;
+            break;
+        }
+    }
+
+    if (startNode) {
+        // Очищаем все предыдущие выделения
+        clearSelection();
+
+        // Запускаем алгоритм BFS
+        const queue = [startNode]; // Очередь вершин, которые нужно обойти
+        const visited = new Set([startNode]); // Множество посещенных вершин
+        while (queue.length > 0) {
+            const node = queue.shift();
+            selectNode(node); // Выделяем текущую вершину
+            printTip(node.id);
+
+            // Получаем соседние вершины и добавляем их в очередь, если они еще не были посещены
+            const neighbors = findNeighbors(node);
+            for (const neighbor of neighbors) {
+                if (!visited.has(neighbor)) {
+                    queue.push(neighbor);
+                    visited.add(neighbor);
+                }
+            }
+        }
+
+        // Определение функции для поиска соседних вершин
+        function findNeighbors(node) {
+            const neighbors = [];
+
+            // Проходим по всем ребрам и ищем соседние вершины для данной вершины
+            for (const edge of Edgs) {
+                if (edge.source === node.id) {
+                    const neighbor = Nods.find((n) => n.id === edge.target);
+                    if (neighbor) {
+                        neighbors.push(neighbor);
+                    }
+                } else if (edge.target === node.id) {
+                    const neighbor = Nods.find((n) => n.id === edge.source);
+                    if (neighbor) {
+                        neighbors.push(neighbor);
+                    }
+                }
+            }
+
+            for (const edge of Edgs) {
+                if (edge.source === node.id) {
+                    const neighbor = NodsC.find((n) => n.id === edge.target);
+                    if (neighbor) {
+                        neighbors.push(neighbor);
+                    }
+                } else if (edge.target === node.id) {
+                    const neighbor = NodsC.find((n) => n.id === edge.source);
+                    if (neighbor) {
+                        neighbors.push(neighbor);
+                    }
+                }
+            }
+
+            return neighbors;
+        }
+
+        // Определение функции для выделения вершины
+        function selectNode(node) {
+            ctx.beginPath();
+            ctx.fillStyle = "red";
+            ctx.arc(node.X, node.Y, 20, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.fillStyle = "white";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(node.label, node.X, node.Y);
+        }
+
+        // Определение функции для очистки выделений
+        function clearSelection() {
+            for (const node of Nods) {
+                drawNode(node.X, node.Y, node.label);
+            }
+
+            for (const node of NodsC) {
+                drawNode(node.X, node.Y, node.label);
+            }
+        }
+    } else {
+        console.log("error");
+    }
+
+    canvas.removeEventListener("click", searchBreadth);
 }

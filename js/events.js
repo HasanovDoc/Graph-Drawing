@@ -64,11 +64,8 @@ const btnMove = document.querySelector('.btn-move');
 let moveActive = false;
 btnMove.addEventListener("click", () => {
     if (!moveActive) {
-        canvas.removeEventListener("mousedown", DaDM);
-        canvas.removeEventListener("click", DaDC);
-        canvas.removeEventListener("click", drawC);
-        canvas.removeEventListener("click", drawNodesCoG);
-        btnDrawedges.removeEventListener("click", drawEdgesCoG);
+        removeEventDrawMode();
+        //btnDrawedges.removeEventListener("click", drawEdgesCoG);
 
         canvas.addEventListener("mousedown", startDragging);
         canvas.addEventListener("mousemove", drag);
@@ -95,20 +92,17 @@ console.log();
 algoritm.addEventListener('change', () => {
     switch (algoritm.selectedIndex) {
         case 1:
-            canvas.removeEventListener("mousedown", DaDM);
-            canvas.removeEventListener("click", DaDC);
-            canvas.removeEventListener("click", drawC);
-            canvas.removeEventListener("click", drawNodesCoG);
-            btnDrawedges.removeEventListener("click", drawEdgesCoG);
-
+            removeEventDrawMode();
+            //btnDrawedges.removeEventListener("click", drawEdgesCoG);
             printTip('Выберите начальную вершину', true)
-
-            let startNode = null;
 
             canvas.addEventListener('click', searchDepth);
 
             break;
-
+        case 2:
+            removeEventDrawMode();
+            printTip('Выберите начальную вершину', true);
+            canvas.addEventListener('click', searchBreadth);
         default:
             break;
     }

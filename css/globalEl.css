@@ -19,3 +19,11 @@ input {
 option {
     color: black;
 }
+
+label {
+    color: white;
+}
+
+p {
+    color: white;
+}

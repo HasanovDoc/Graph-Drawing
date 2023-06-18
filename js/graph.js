@@ -6,4 +6,5 @@ const canvas = document.querySelector('#graph-canvas'),
 canvas.width = wrapper.offsetWidth;
 canvas.height = window.innerHeight;
 
-//Обход графа в глубину
+//Поиск паросочетания
+//canvas.addEventListener('click', searchBreadth);
