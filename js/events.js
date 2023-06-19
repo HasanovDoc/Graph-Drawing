@@ -1,4 +1,5 @@
 Edgs = [];
+
 Nods = [];
 NodsLU = [];
 NodsLD = [];
@@ -90,7 +91,7 @@ btnMove.addEventListener("click", () => {
 
 ////////////////Алгоритмы
 const algoritm = document.querySelector('#algorithms');
-console.log();
+const algChild = document.querySelectorAll('#algorithms option');
 
 algoritm.addEventListener('change', () => {
     switch (algoritm.selectedIndex) {
@@ -100,12 +101,27 @@ algoritm.addEventListener('change', () => {
             printTip('Выберите начальную вершину', true)
 
             canvas.addEventListener('click', searchDepth);
-
+            algoritm.selectedIndex = 0;
             break;
         case 2:
             removeEventDrawMode();
             printTip('Выберите начальную вершину', true);
             canvas.addEventListener('click', searchBreadth);
+            algoritm.selectedIndex = 0;
+            break;
+
+        case 3:
+            const parosch = maxPairsOfGraph(transform(Edgs));
+            printTip("Паросочетание:", true);
+            for (const pairNodes of parosch) {
+                printTip(pairNodes);
+
+            }
+            algoritm.selectedIndex = 0;
+            //console.log(parosch);
+
+            break;
+
         default:
             break;
     }

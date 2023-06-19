@@ -5,6 +5,3 @@ const canvas = document.querySelector('#graph-canvas'),
 // Определяем размеры холста
 canvas.width = wrapper.offsetWidth;
 canvas.height = window.innerHeight;
-
-//Поиск паросочетания
-//canvas.addEventListener('click', searchBreadth);

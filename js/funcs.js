@@ -560,3 +560,56 @@ function searchBreadth(event) {
 
     canvas.removeEventListener("click", searchBreadth);
 }
+
+//Трансфармация массива объектов {source: 0, target: 1}, в объект смежности
+function transform(input) {
+    const graph = {};
+
+    for (const { source, target }
+        of input) {
+        if (!graph[source]) graph[source] = [];
+        graph[source].push(target);
+
+        if (!graph[target]) graph[target] = [];
+        graph[target].push(source);
+    }
+
+    return graph;
+}
+
+//Поиск паросочетания
+function maxPairsOfGraph(graph) {
+    const pairs = [];
+    const visited = {};
+
+    for (let node in graph) {
+        if (!visited[node]) {
+            findMaxPair(node);
+        }
+    }
+
+    function findMaxPair(node) {
+        visited[node] = true;
+
+        for (let neighbor of graph[node]) {
+            if (!visited[neighbor]) {
+                pairs.push([node, neighbor]);
+                visited[neighbor] = true;
+                return;
+            }
+        }
+    }
+
+    // Сортируем пары по количеству ребер между вершинами
+    pairs.sort((a, b) => graph[a[0]].length - graph[b[0]].length);
+
+    // Берем первые пары до тех пор пока они не закончатся или не будет достигнуто макс. число пар
+    let maxPairs = [];
+    let i = 0;
+    while (i < pairs.length && maxPairs.length < (Object.keys(graph).length / 2)) {
+        maxPairs.push(pairs[i]);
+        i++;
+    }
+
+    return maxPairs;
+}
