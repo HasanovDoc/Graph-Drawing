@@ -1,5 +1,4 @@
 Edgs = [];
-
 Nods = [];
 NodsLU = [];
 NodsLD = [];
@@ -93,11 +92,10 @@ btnMove.addEventListener("click", () => {
 const algoritm = document.querySelector('#algorithms');
 const algChild = document.querySelectorAll('#algorithms option');
 
-algoritm.addEventListener('change', () => {
+algoritm.addEventListener('change', () => { //Алгоритмы
     switch (algoritm.selectedIndex) {
         case 1:
             removeEventDrawMode();
-            //btnDrawedges.removeEventListener("click", drawEdgesCoG);
             printTip('Выберите начальную вершину', true)
 
             canvas.addEventListener('click', searchDepth);
@@ -115,10 +113,21 @@ algoritm.addEventListener('change', () => {
             printTip("Паросочетание:", true);
             for (const pairNodes of parosch) {
                 printTip(pairNodes);
+                ctx.lineWidth = 8;
+                ctx.strokeStyle = "red";
 
+                const sourceNode = getNodeById(Number(pairNodes[0]));
+                const targetNode = getNodeById(pairNodes[1]);
+
+                if (sourceNode && targetNode) {
+                    drawEdges(sourceNode.X, sourceNode.Y, targetNode.X, targetNode.Y);
+                }
             }
+
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = "black";
+            redrawNodes();
             algoritm.selectedIndex = 0;
-            //console.log(parosch);
 
             break;
 
