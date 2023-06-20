@@ -200,6 +200,14 @@ function stopDragging() {
 }
 
 function redrawGraph() {
+    for (const edge of Edgs) {
+        const sourceNode = getNodeById(edge.source);
+        const targetNode = getNodeById(edge.target);
+
+        if (sourceNode && targetNode) {
+            drawEdges(sourceNode.X, sourceNode.Y, targetNode.X, targetNode.Y);
+        }
+    }
     for (const node of Nods) {
         drawNode(node.X, node.Y, node.label);
     }
@@ -214,15 +222,6 @@ function redrawGraph() {
 
     for (const node of NodsC) {
         drawNode(node.X, node.Y, node.label);
-    }
-
-    for (const edge of Edgs) {
-        const sourceNode = getNodeById(edge.source);
-        const targetNode = getNodeById(edge.target);
-
-        if (sourceNode && targetNode) {
-            drawEdges(sourceNode.X, sourceNode.Y, targetNode.X, targetNode.Y);
-        }
     }
 }
 
@@ -311,6 +310,24 @@ function isSelected(event) {
         }
     }
     return [isSelect, selNode];
+}
+
+function redrawNodes() {
+    for (const node of Nods) {
+        drawNode(node.X, node.Y, node.label);
+    }
+
+    for (const node of NodsLU) {
+        drawNode(node.X, node.Y, node.label);
+    }
+
+    for (const node of NodsLD) {
+        drawNode(node.X, node.Y, node.label);
+    }
+
+    for (const node of NodsC) {
+        drawNode(node.X, node.Y, node.label);
+    }
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
