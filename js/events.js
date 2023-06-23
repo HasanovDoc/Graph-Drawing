@@ -21,8 +21,9 @@ drawMode.addEventListener('change', () => { //Режим рисования гр
     removeEventDrawMode();
     btnDrawedges.classList.remove('visible');
     if (drawMode.selectedIndex == 1) {
-
         canvas.addEventListener('click', drawC);
+        btnDrawedges.classList.add('visible');
+        btnDrawedges.addEventListener('click', drawEdgesCoG);
     } else if (drawMode.selectedIndex == 0) {
 
         //Рисование путем Drag&Drop
@@ -35,7 +36,7 @@ drawMode.addEventListener('change', () => { //Режим рисования гр
         canvas.addEventListener('mousedown', drawEdgeDrag);
         canvas.addEventListener('mouseup', drawEdgeDrop);
 
-        btnDrawedges.addEventListener('click', drawEdgesCoG);
+
     }
 });
 
@@ -68,7 +69,6 @@ let moveActive = false;
 btnMove.addEventListener("click", () => {
     if (!moveActive) {
         removeEventDrawMode();
-        //btnDrawedges.removeEventListener("click", drawEdgesCoG);
 
         canvas.addEventListener("mousedown", startDragging);
         canvas.addEventListener("mousemove", drag);
