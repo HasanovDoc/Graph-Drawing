@@ -52,10 +52,7 @@ function drawC(event) { //По клику рисовать вершины.
 
     drawNode(event.offsetX, event.offsetY, label);
     addNodes(iter, event.offsetX, event.offsetY, label);
-    // if (iter >= 1) {
-    //     addEdgs(iter - 1, iter);
-    //     drawEdges(Nods[iter - 1].X, Nods[iter - 1].Y, Nods[iter].X, Nods[iter].Y);
-    // }
+
     iter++;
 
 };
@@ -66,7 +63,7 @@ let [isSelect_2, selectNode_2] = [];
 function drawEdgeDrag(event) { //Рисовать ребра между вершинами drag
 
     [isSelect_1, selectNode_1] = isSelected(event);
-    btnDrawedges.classList.add('visible');
+
 }
 
 function drawEdgeDrop(event) { //Рисовать ребра между вершинами drop
@@ -82,9 +79,12 @@ function drawEdgeDrop(event) { //Рисовать ребра между верш
 }
 
 function drawEdgesCoG() {
-    for (let i = 0; i < iterCoGr; i++)
-        for (let j = 0; j < i; j++)
-            drawEdges(Nods[j].X, Nods[j].Y, Nods[i].X, Nods[i].Y);
+    for (let i = 0; i < iter; i++)
+        for (let j = 0; j < i; j++) {
+            addEdgs(j, i);
+        }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    redrawGraph();
 
 }
 
@@ -235,7 +235,10 @@ function getNodeById(id) {
 
 /////////////////////////////////////////////
 function addEdgs(src, tgt) { //Добавление ребра
-    Edgs.push({ source: src, target: tgt });
+    Edgs.push({
+        source: src,
+        target: tgt
+    });
 };
 
 function addNodesLU(id, x, y, label) { //Добавление вершины для двудольного графа, верхняя линия
@@ -243,7 +246,12 @@ function addNodesLU(id, x, y, label) { //Добавление вершины д�
 };
 
 function addNodesC(vNods, id, x, y, label) { //Добавление вершины
-    vNods.push({ id: id, X: x, Y: y, label: label });
+    vNods.push({
+        id: id,
+        X: x,
+        Y: y,
+        label: label
+    });
 };
 
 function addNodes(id, x, y, label) { //Добавление вершины
