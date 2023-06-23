@@ -73,6 +73,10 @@ button {
     display: inherit;
 }
 
+#algorithms {
+    width: 120px;
+}
+
 #algorithms option[value="hide"] {
     display: none;
 }
