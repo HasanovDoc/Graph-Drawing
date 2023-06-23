@@ -8,6 +8,8 @@ select {
     /* box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.4); */
     border-radius: 5px;
     background-color: rgba(1, 30, 50, 0.236);
+    font-size: 14px;
+    font-weight: bold;
 }
 
 input {
@@ -22,6 +24,7 @@ option {
 
 label {
     color: white;
+    font-size: 12px;
 }
 
 p {
