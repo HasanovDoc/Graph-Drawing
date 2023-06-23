@@ -23,15 +23,14 @@
                             <option value="drawnodes">Соединить вершины</option>
                         </select>
                         <label for="draw-select__btn">
-                            <button class="btn-draw">Draw Complete Graph</button>
+                            <button class="btn-draw">Соединить все вершины</button>
                         </label>
                     </div>
 
                     <div class="modes__item modes__item-2">
                         <select name="" id="libr-graphs" class="draw-select libr-graphs">
-                            <option value="drawCompl">Draw complete circle graph</option>
-                            <option value="">Draw biparate graph</option>
-                            <option value="">test-3</option>
+                            <option value="drawCompl">Полный круговой граф</option>
+                            <option value="">Поный двудольный граф</option>
                         </select>
                         <div class="libr-graphs_configs">
                             <div class="configs__item configs__item-1 visible">
@@ -42,7 +41,7 @@
                             <div class="configs__item configs__item-2">
 
                                 <div class="biparGraph">
-                                    <p>K<sub>i,</sub><sub>j</sub></p>
+                                    <label for=""><p>K<sub>i,</sub><sub>j</sub></p></label>
                                     <div class="inputs-graph">
                                         <p>
                                             <label for="aValue">i:</label>
@@ -53,7 +52,7 @@
                                             <input type="number" name="" id="bValue" placeholder="0">
                                         </p>
                                     </div>
-                                    <button class="bip-btn">Draw bipartite graph</button>
+                                    <button class="bip-btn">Ок</button>
                                 </div>
 
                             </div>
@@ -68,7 +67,7 @@
                             <option disabled selected value="hide">Алгоритмы</option>
                             <option value="searchDepht">Поиск в глубину</option>
                             <option value="searchBreadth">Поиск в ширину</option>
-                            <option value="searchBreadth"><p>Найти паросочетания</p></option>
+                            <option value="searchBreadth">Найти паросочетания</option>
                         </select>
                     </div>
                 </div>
@@ -92,8 +91,9 @@
 
     <div class="popUp__container">
         <div class="popUp__import">
+            <div class="popUp__close"></div>
             <!-- <input class="inputJsonTxt" type="text" placeholder="json строка"> -->
-            <textarea name="inputJsonTxt" class="inputJsonTxt" id="" cols="30" rows="10" placeholder="json строка"></textarea>
+            <textarea name="inputJsonTxt" class="inputJsonTxt" id="" cols="30" rows="10" placeholder="JSON"></textarea>
             <input type="file" class="inputJsonFile">
             <button class="btn-sendJson">Отправить</button>
         </div>
@@ -103,6 +103,6 @@
 <script src="./js/graph.js"></script>
 <script src="./js/funcs.js"></script>
 <script src="./js/events.js"></script>
-<script src="./js/importJson.js"></script>
+<script src="./js/importGraph.js"></script>
 
 </html>
