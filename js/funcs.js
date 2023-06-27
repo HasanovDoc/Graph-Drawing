@@ -639,6 +639,9 @@ function maxPairsOfGraph(graph) {
 
     return maxPairs;
 }
+
+
+
 //Поиск паросочетания2
 
 function maxPairsOfGraph1(graph, maxPairs) {
@@ -649,7 +652,6 @@ function maxPairsOfGraph1(graph, maxPairs) {
 
     for (let node in graph) {
         if (!visited[node]) {
-
             if (graph[node].length == 0)
                 visited[node] = true;
             buffMaxNeigh[node] = findMaxPair(node);
