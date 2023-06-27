@@ -24,11 +24,14 @@ drawMode.addEventListener('change', () => { //Режим рисования гр
         canvas.addEventListener('click', drawC);
         btnDrawedges.classList.add('visible');
         btnDrawedges.addEventListener('click', drawEdgesCoG);
+        printTip('Нажмите что-бы нарисовать вершину.', true);
+
     } else if (drawMode.selectedIndex == 0) {
 
         //Рисование путем Drag&Drop
         canvas.addEventListener('mousedown', DaDM);
         canvas.addEventListener('click', DaDC);
+        printTip('Нажмите и удерживайте что-бы нарисовать две вершины с ребром между ними.', true);
         /////////////////////////
     } else if (drawMode.selectedIndex == 2) {
 

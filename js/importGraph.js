@@ -61,7 +61,7 @@ let json = {
 
 function drawGraphByJson(jsonObj) {
     let x_0 = canvas.width / 2;
-    let y_0 = canvas.height / 2;
+    let y_0 = canvas.height / 3;
     let r = y_0 - 100;
     let countNode = Object.keys(jsonObj).length;
     let iter = 0;

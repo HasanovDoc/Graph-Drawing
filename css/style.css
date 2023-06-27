@@ -160,13 +160,14 @@ button {
     justify-self: center;
     align-self: center;
     color: white;
+    font-size: 19px;
 }
 
 #graph-canvas {
     border: 1px solid black;
     z-index: 4;
-    /* background-color: rgb(165, 174, 174); */
-    background-color: #4E4E50;
+    /* background-color: #4E4E50; */
+    background-color: #fff;
 }
 
 .popUp__container {

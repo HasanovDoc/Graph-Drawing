@@ -607,6 +607,7 @@ function maxPairsOfGraph(graph) {
     const pairs = [];
     const visited = {};
 
+
     for (let node in graph) {
         if (!visited[node]) {
             findMaxPair(node);
@@ -635,6 +636,76 @@ function maxPairsOfGraph(graph) {
         maxPairs.push(pairs[i]);
         i++;
     }
+
+    return maxPairs;
+}
+//Поиск паросочетания2
+
+function maxPairsOfGraph1(graph, maxPairs) {
+    let graph1 = [];
+    const pairs = [];
+    const visited = {};
+    const buffMaxNeigh = [];
+
+    for (let node in graph) {
+        if (!visited[node]) {
+
+            if (graph[node].length == 0)
+                visited[node] = true;
+            buffMaxNeigh[node] = findMaxPair(node);
+        }
+    }
+
+    for (let i = 0; i < buffMaxNeigh.length; i++) {
+        if (i == buffMaxNeigh[buffMaxNeigh[i]] && !visited[i] && !visited[buffMaxNeigh[i]]) {
+            pairs.push([i, buffMaxNeigh]);
+            visited[i] = true;
+            visited[buffMaxNeigh[i]] = true;
+        }
+    }
+
+    for (let node of graph) {
+        if (visited[node]) {
+            graph1[node] = []; ////////////Не уверен
+        } else {
+            graph1[node] = graph[node].filter((f) => {
+                return !visited[f];
+            });
+        }
+    }
+    let sum = 0;
+    for (let node of graph1) {
+        sum += graph1[node].length;
+    }
+    if (sum > 0) {
+        maxPairsOfGraph1(graph1);
+    }
+
+    function findMaxPair(node) {
+        let maxPower = 0;
+        let result = -1;
+        for (let neighbor of graph[node]) {
+            if (graph[neighbor].length > maxPower) {
+                maxPower = graph[neighbor].length;
+                result = neighbor;
+
+            }
+        }
+        return result;
+    }
+
+    // Сортируем пары по количеству ребер между вершинами
+    //pairs.sort((a, b) => graph[a[0]].length - graph[b[0]].length);
+
+    // Берем первые пары до тех пор пока они не закончатся или не будет достигнуто макс. число пар
+    for (let pair1 of pairs) {
+        maxPairs.push(pair1);
+    }
+}
+
+function finalMaxPairs(graph) {
+    let maxPairs = [];
+    maxPairsOfGraph1(graph, maxPairs);
 
     return maxPairs;
 }
