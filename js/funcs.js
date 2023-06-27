@@ -641,7 +641,7 @@ function maxPairsOfGraph(graph) {
 
 //Поиск паросочетания2
 function maxPairsOfGraph1(graph) {
-    let graph1 = graph;
+    let graph1 = [];
     const pairs = [];
     const visited = {};
     const buffMaxNeigh = [];
@@ -663,9 +663,11 @@ function maxPairsOfGraph1(graph) {
         }
     }
 
-    for (let node of graph1){
+    for (let node of graph){
         if (visited[node]){
             graph1[node] = [];////////////Не уверен
+        }else{
+            graph1[node] = graph[node];
         }
     }
     let sum = 0;
