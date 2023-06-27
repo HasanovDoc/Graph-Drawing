@@ -667,7 +667,9 @@ function maxPairsOfGraph1(graph) {
         if (visited[node]){
             graph1[node] = [];////////////Не уверен
         }else{
-            graph1[node] = graph[node];
+            graph1[node] = graph[node].filter((f)=>{
+                return !visited[f];
+            });
         }
     }
     let sum = 0;
