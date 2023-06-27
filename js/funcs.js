@@ -640,7 +640,8 @@ function maxPairsOfGraph(graph) {
 }
 
 //Поиск паросочетания2
-function maxPairsOfGraph1(graph) {
+
+function maxPairsOfGraph1(graph, maxPairs) {
     let graph1 = [];
     const pairs = [];
     const visited = {};
@@ -694,15 +695,17 @@ function maxPairsOfGraph1(graph) {
     }
 
     // Сортируем пары по количеству ребер между вершинами
-    pairs.sort((a, b) => graph[a[0]].length - graph[b[0]].length);
+    //pairs.sort((a, b) => graph[a[0]].length - graph[b[0]].length);
 
     // Берем первые пары до тех пор пока они не закончатся или не будет достигнуто макс. число пар
-    let maxPairs = [];
-    let i = 0;
-    while (i < pairs.length && maxPairs.length < (Object.keys(graph).length / 2)) {
-        maxPairs.push(pairs[i]);
-        i++;
+    for (let pair1 of pairs) {
+        maxPairs.push(pair1);
     }
+}
 
+function finalMaxPairs(graph){
+    let maxPairs = [];
+    maxPairsOfGraph1(graph, maxPairs);
+    
     return maxPairs;
 }
