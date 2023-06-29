@@ -396,6 +396,7 @@ function searchDepth(event) {
         function dfs(node, visited) {
             visited.add(node);
             selectNode(node); // Выделяем текущую вершину
+            printTip(node.id);
 
             // Рекурсивно запускаем DFS для всех соседних вершин
             const neighbors = findNeighbors(node);
@@ -442,20 +443,7 @@ function searchDepth(event) {
             return neighbors;
         }
 
-        // Определение функции для выделения вершины
-        function selectNode(node) {
-            ctx.beginPath();
-            ctx.fillStyle = 'red';
-            ctx.arc(node.X, node.Y, 20, 0, 2 * Math.PI);
-            ctx.fill();
 
-            printTip(node.id);
-
-            ctx.fillStyle = 'white';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(node.label, node.X, node.Y);
-        }
 
         // Определение функции для очистки выделений
         function clearSelection() {
@@ -556,18 +544,7 @@ function searchBreadth(event) {
             return neighbors;
         }
 
-        // Определение функции для выделения вершины
-        function selectNode(node) {
-            ctx.beginPath();
-            ctx.fillStyle = "red";
-            ctx.arc(node.X, node.Y, 20, 0, 2 * Math.PI);
-            ctx.fill();
 
-            ctx.fillStyle = "white";
-            ctx.textAlign = "center";
-            ctx.textBaseline = "middle";
-            ctx.fillText(node.label, node.X, node.Y);
-        }
 
         // Определение функции для очистки выделений
         function clearSelection() {
@@ -600,6 +577,19 @@ function transform(input) {
     }
 
     return graph;
+}
+
+// Определение функции для выделения вершины
+function selectNode(node) {
+    ctx.beginPath();
+    ctx.fillStyle = 'white';
+    ctx.arc(node.X, node.Y, 17, 0, 2 * Math.PI);
+    ctx.fill();
+
+    ctx.fillStyle = 'black';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(node.label, node.X, node.Y);
 }
 
 //Поиск паросочетания
@@ -641,10 +631,10 @@ function maxPairsOfGraph(graph) {
 }
 
 
-
+let answer = [];
 //Поиск паросочетания2
+function maxPairsOfGraph1(graph, maxPairs1) {
 
-function maxPairsOfGraph1(graph, maxPairs) {
     let graph1 = [];
     const pairs = [];
     const visited = {};
@@ -661,12 +651,17 @@ function maxPairsOfGraph1(graph, maxPairs) {
     for (let i = 0; i < buffMaxNeigh.length; i++) {
         if (i == buffMaxNeigh[buffMaxNeigh[i]] && !visited[i] && !visited[buffMaxNeigh[i]]) {
             pairs.push([i, buffMaxNeigh]);
+            //console.log(buffMaxNeigh);
+            answer.push(buffMaxNeigh)
+                //console.log(answer);
+
+
             visited[i] = true;
             visited[buffMaxNeigh[i]] = true;
         }
     }
 
-    for (let node of graph) {
+    for (let node in graph) {
         if (visited[node]) {
             graph1[node] = []; ////////////Не уверен
         } else {
@@ -676,8 +671,14 @@ function maxPairsOfGraph1(graph, maxPairs) {
         }
     }
     let sum = 0;
+    let iterator = 0;
     for (let node of graph1) {
-        sum += graph1[node].length;
+        if (graph1[node] == null) {
+            sum += 0;
+        } else {
+            sum += graph1[node].length;
+        }
+
     }
     if (sum > 0) {
         maxPairsOfGraph1(graph1);
@@ -700,14 +701,22 @@ function maxPairsOfGraph1(graph, maxPairs) {
     //pairs.sort((a, b) => graph[a[0]].length - graph[b[0]].length);
 
     // Берем первые пары до тех пор пока они не закончатся или не будет достигнуто макс. число пар
-    for (let pair1 of pairs) {
-        maxPairs.push(pair1);
+
+    //console.log(pairs);
+
+    for (let pair1 in pairs) {
+        //console.log("iterator" + iterator);
+
+        //maxPairs1.push(pair1);
+        //console.log(pair1);
+        iterator++;
     }
 }
 
-function finalMaxPairs(graph) {
-    let maxPairs = [];
-    maxPairsOfGraph1(graph, maxPairs);
 
-    return maxPairs;
+function finalMaxPairs(graph) {
+    let maxPairs1 = [];
+    maxPairsOfGraph1(graph, maxPairs1);
+
+    //return maxPairs;
 }

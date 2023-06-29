@@ -115,7 +115,7 @@ algoritm.addEventListener('change', () => { //Алгоритмы
             const parosch = maxPairsOfGraph(transform(Edgs));
             printTip("Паросочетание:", true);
             for (const pairNodes of parosch) {
-                printTip(pairNodes);
+                printTip("{" + pairNodes + "}");
                 ctx.lineWidth = 8;
                 ctx.strokeStyle = "red";
 
@@ -126,6 +126,41 @@ algoritm.addEventListener('change', () => { //Алгоритмы
                     drawEdges(sourceNode.X, sourceNode.Y, targetNode.X, targetNode.Y);
                 }
             }
+
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = "black";
+            redrawNodes();
+            algoritm.selectedIndex = 0;
+
+            break;
+
+        case 4:
+            //const parosch1 = finalMaxPairs(transform(Edgs));
+            finalMaxPairs(transform(Edgs));
+            printTip("Паросочетание:", true);
+
+            answer.splice(2, answer.length);
+            answer[0] = [answer[0][0], answer[0][1]];
+            answer[1] = answer[1].filter(function(item) {
+                return item !== -1;
+            });
+            //console.log(answer);
+
+            printTip(answer);
+            // for (const pairNodes in parosch1) {
+            //     printTip("{" + pairNodes + "}");
+            //     ctx.lineWidth = 8;
+            //     ctx.strokeStyle = "red";
+
+            //     const sourceNode = getNodeById(Number(pairNodes[0]));
+            //     const targetNode = getNodeById(pairNodes[1]);
+
+            //     if (sourceNode && targetNode) {
+            //         drawEdges(sourceNode.X, sourceNode.Y, targetNode.X, targetNode.Y);
+            //     }
+            // }
+            // console.log(answer[0]);
+
 
             ctx.lineWidth = 1;
             ctx.strokeStyle = "black";
