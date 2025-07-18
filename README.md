@@ -1,6 +1,6 @@
 # 🎨📊 Graph Canvas Toolkit
 
-[![Live Demo](https://img.shields.io/badge/Demo-Live-green?style=for-the-badge)](https://hasanovdoc.github.io/Graph-Drawing/)
+[![Live Demo](https://img.shields.io/badge/Demo-Live-green?style=for-the-badge)](https://hasanovdoc.github.io/chemistry-model3d/)
 
 Интерактивная canvas-доска для визуализации графов и работы с алгоритмами. Проект позволяет создавать, редактировать графы и применять к ним различные алгоритмы обработки.
 
@@ -22,5 +22,7 @@
 - **Визуализация**:
   - Пошаговое выполнение алгоритмов
   - Подсветка текущих операций
- 
-  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
